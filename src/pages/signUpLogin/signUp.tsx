@@ -17,9 +17,15 @@ const SignUpLogin: React.FC = () => {
 	return (
 		<IonGrid>
 			<IonRow>
-				<IonCol size='1' className='ion-align-self-center'>
+				<IonButton
+					className='ion-align-self-center'
+					color='dark'
+					fill='clear'
+					href='/'
+				>
 					<IonIcon size='large' icon={closeOutline} />
-				</IonCol>
+				</IonButton>
+
 				<IonCol className='ion-text-center'>
 					<IonIcon icon={logoTwitter} size='large' color='secondary' />
 				</IonCol>
@@ -35,19 +41,28 @@ const SignUpLogin: React.FC = () => {
 					<IonCol>
 						<IonList>
 							<IonItem>
-								<IonInput type='text' placeholder='Nombre'></IonInput>
-							</IonItem>
-						</IonList>
-
-						<IonList>
-							<IonItem>
-								<IonInput type='password' placeholder='Contraseña'></IonInput>
+								<IonInput
+									className='primary-input'
+									type='text'
+									placeholder='Nombre'
+								></IonInput>
 							</IonItem>
 						</IonList>
 
 						<IonList>
 							<IonItem>
 								<IonInput
+									className='primary-input'
+									type='password'
+									placeholder='Contraseña'
+								></IonInput>
+							</IonItem>
+						</IonList>
+
+						<IonList>
+							<IonItem>
+								<IonInput
+									className='primary-input'
 									type='password'
 									placeholder='Repita la contraseña'
 								></IonInput>
@@ -57,7 +72,7 @@ const SignUpLogin: React.FC = () => {
 				</IonRow>
 				<IonRow>
 					<IonCol>
-						<IonTitle className='date-birth ion-text-start'>
+						<IonTitle className='date-birth  ion-text-start'>
 							Fecha de nacimiento
 						</IonTitle>
 					</IonCol>
@@ -66,12 +81,12 @@ const SignUpLogin: React.FC = () => {
 					<IonCol>
 						<IonList>
 							<IonItem>
-								<IonInput type='date'></IonInput>
+								<IonInput className='primary-input' type='date'></IonInput>
 							</IonItem>
 						</IonList>
 					</IonCol>
 				</IonRow>
-				<IonButton className='btn-signUp' expand='block'>
+				<IonButton shape='round' className='btn-signUp ' expand='block'>
 					Registrarse
 				</IonButton>
 			</form>

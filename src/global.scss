@@ -10,4 +10,22 @@
 @import '@ionic/react/css/normalize.css';
 @import '@ionic/react/css/structure.css';
 @import '@ionic/react/css/typography.css';
-@import './theme/variables.css'
+@import './theme/variables.css';
+
+*{
+    text-decoration: none;
+}
+
+.primary-input {
+    border: 1px solid lightgray;
+    padding:5px !important;
+    --padding-start: 10px !important;
+    color: #999999;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.btn-landing{
+    height: 3em;
+    width: 90%;
+}
