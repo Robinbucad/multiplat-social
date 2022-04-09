@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "twitter",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
