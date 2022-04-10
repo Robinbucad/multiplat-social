@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import './style.scss'
 import { logoTwitter, closeOutline } from 'ionicons/icons'
 import {
@@ -9,12 +9,44 @@ import {
 	IonInput,
 	IonItem,
 	IonList,
+	IonProgressBar,
 	IonRow,
 	IonText,
 	IonTitle,
+	NavContext,
 } from '@ionic/react'
 
 const Login: React.FC = () => {
+	const [loading, setLoading] = useState<boolean>(false)
+	const { navigate } = useContext(NavContext)
+	const redirect = useCallback(() => navigate('/home'), [])
+
+	const handleSubmit = async (e: any) => {
+		e.preventDefault()
+		setLoading(true)
+		const userFormData = new FormData(e.target)
+		const METHOD = {
+			method: 'post',
+			body: JSON.stringify(Object.fromEntries(userFormData)),
+			headers: { 'Content-type': 'application/json' },
+		}
+
+		const res = await fetch(`${process.env.REACT_APP_LOGIN_API}`, METHOD)
+
+		if (res.status === 201) {
+			const dat = await res.json()
+			sessionStorage.setItem('token', dat.access_token)
+
+			setTimeout(() => {
+				setLoading(false)
+				redirect()
+			}, 800)
+		}
+		if (res.status === 404) {
+			alert('Datos incorrectos')
+			setLoading(false)
+		}
+	}
 	return (
 		<IonGrid>
 			<IonRow>
@@ -41,12 +73,16 @@ const Login: React.FC = () => {
 				</IonCol>
 			</IonRow>
 
-			<form>
+			<form onSubmit={handleSubmit}>
+				{loading ? (
+					<IonProgressBar type='indeterminate'></IonProgressBar>
+				) : null}
 				<IonRow className='ion-padding'>
 					<IonCol>
 						<IonList>
 							<IonItem>
 								<IonInput
+									name='email'
 									className='primary-input'
 									type='text'
 									placeholder='Coreo Electronico'
@@ -57,6 +93,7 @@ const Login: React.FC = () => {
 						<IonList>
 							<IonItem>
 								<IonInput
+									name='password'
 									className='primary-input'
 									type='password'
 									placeholder='Contraseña'
@@ -66,7 +103,12 @@ const Login: React.FC = () => {
 					</IonCol>
 				</IonRow>
 
-				<IonButton shape='round' className='btn-signUp ' expand='block'>
+				<IonButton
+					type='submit'
+					shape='round'
+					className='btn-signUp '
+					expand='block'
+				>
 					Iniciar sesión
 				</IonButton>
 
