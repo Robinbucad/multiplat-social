@@ -16,7 +16,7 @@ import {
 	NavContext,
 } from '@ionic/react'
 import { UserContext } from '../../context/user/user.context'
-import { UserType } from '../../models'
+import { LoginUser } from '../../functions/API'
 
 const Login: React.FC = () => {
 	const [loading, setLoading] = useState<boolean>(false)
@@ -28,31 +28,13 @@ const Login: React.FC = () => {
 		e.preventDefault()
 		setLoading(true)
 		const userFormData = new FormData(e.target)
-		const METHOD = {
-			method: 'post',
-			body: JSON.stringify(Object.fromEntries(userFormData)),
-			headers: { 'Content-type': 'application/json' },
-		}
-
-		const res = await fetch(`${process.env.REACT_APP_LOGIN_API}`, METHOD)
-
-		if (res.status === 201) {
-			const dat = await res.json()
-			sessionStorage.setItem('token', dat.access_token)
-
-			const resSingleUser = await fetch('http://localhost:4000/users/single', {
-				method: 'get',
-				headers: {
-					Authorization: `Bearer ${dat.access_token}`,
-				},
-			})
-			const dataSingleUser: UserType = await resSingleUser.json()
-			setUser(dataSingleUser)
-			localStorage.setItem('user', JSON.stringify(dataSingleUser))
+		const user = await LoginUser(userFormData)
+		if (user?.dataSingleUser) {
+			await setUser(user)
 			setLoading(false)
 			redirect()
 		}
-		if (res.status === 404) {
+		if (user?.res === undefined) {
 			alert('Datos incorrectos')
 			setLoading(false)
 		}
