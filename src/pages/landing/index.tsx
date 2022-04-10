@@ -51,7 +51,11 @@ const Home: React.FC = () => {
 								Registrarse con Google
 							</IonButton>
 
-							<IonButton href='/signUp' className='btn-landing' shape='round'>
+							<IonButton
+								href='/signUp'
+								className='btn-landing ion-margin-top'
+								shape='round'
+							>
 								Registrarse con Nosotros
 							</IonButton>
 						</IonCol>

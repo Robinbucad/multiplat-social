@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useCallback, useContext } from 'react'
 import './style.scss'
 import { logoTwitter, closeOutline } from 'ionicons/icons'
 import {
@@ -9,11 +9,39 @@ import {
 	IonInput,
 	IonItem,
 	IonList,
+	IonProgressBar,
 	IonRow,
 	IonTitle,
+	NavContext,
 } from '@ionic/react'
 
 const SignUpLogin: React.FC = () => {
+	const [loading, setLoading] = useState<boolean>(false)
+	const { navigate } = useContext(NavContext)
+	const redirect = useCallback(() => navigate('/'), [])
+
+	const handleSubmit = async (e: any) => {
+		e.preventDefault()
+		setLoading(true)
+		const userFormData = new FormData(e.target)
+		const METHOD = {
+			method: 'post',
+			body: JSON.stringify(Object.fromEntries(userFormData)),
+			headers: { 'Content-type': 'application/json' },
+		}
+
+		const res = await fetch(`${process.env.REACT_APP_REGISTER_API}`, METHOD)
+		if (res.status === 201) {
+			alert('Se te ha enviado un correo de validación')
+			setLoading(false)
+			redirect()
+		}
+		if (res.status === 409) {
+			alert('El usuario ya existe')
+			setLoading(false)
+		}
+	}
+
 	return (
 		<IonGrid>
 			<IonRow>
@@ -36,22 +64,47 @@ const SignUpLogin: React.FC = () => {
 				</IonCol>
 			</IonRow>
 
-			<form>
+			<form onSubmit={handleSubmit}>
+				{loading ? (
+					<IonProgressBar type='indeterminate'></IonProgressBar>
+				) : null}
+
 				<IonRow className='ion-padding'>
 					<IonCol>
 						<IonList>
 							<IonItem>
 								<IonInput
+									name='email'
+									className='primary-input'
+									type='email'
+									placeholder='Email'
+								></IonInput>
+							</IonItem>
+						</IonList>
+						<IonList>
+							<IonItem>
+								<IonInput
+									name='name'
 									className='primary-input'
 									type='text'
 									placeholder='Nombre'
 								></IonInput>
 							</IonItem>
 						</IonList>
-
 						<IonList>
 							<IonItem>
 								<IonInput
+									name='username'
+									className='primary-input'
+									type='text'
+									placeholder='@Username'
+								></IonInput>
+							</IonItem>
+						</IonList>
+						<IonList>
+							<IonItem>
+								<IonInput
+									name='password'
 									className='primary-input'
 									type='password'
 									placeholder='Contraseña'
@@ -62,6 +115,7 @@ const SignUpLogin: React.FC = () => {
 						<IonList>
 							<IonItem>
 								<IonInput
+									name='password'
 									className='primary-input'
 									type='password'
 									placeholder='Repita la contraseña'
@@ -81,12 +135,21 @@ const SignUpLogin: React.FC = () => {
 					<IonCol>
 						<IonList>
 							<IonItem>
-								<IonInput className='primary-input' type='date'></IonInput>
+								<IonInput
+									name='date'
+									className='primary-input'
+									type='date'
+								></IonInput>
 							</IonItem>
 						</IonList>
 					</IonCol>
 				</IonRow>
-				<IonButton shape='round' className='btn-signUp ' expand='block'>
+				<IonButton
+					type='submit'
+					shape='round'
+					className='btn-signUp '
+					expand='block'
+				>
 					Registrarse
 				</IonButton>
 			</form>
