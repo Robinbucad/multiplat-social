@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './style.scss'
 
 import {
@@ -22,7 +22,11 @@ import {
 } from '@ionic/react'
 import defaultPic from '../../assets/images/default-pic.png'
 
+import { UserContext } from '../../context/user/user.context'
+
 const MenuLeft: React.FC = () => {
+	const { user } = useContext(UserContext)
+
 	return (
 		<>
 			<IonMenu
@@ -40,7 +44,10 @@ const MenuLeft: React.FC = () => {
 					<IonList>
 						<IonItem className='item'>
 							<IonAvatar className='img-prof'>
-								<img src={defaultPic} alt='Imagen perfil usuario'></img>
+								<img
+									src={user.file === '' ? defaultPic : user.file}
+									alt='Imagen perfil usuario'
+								></img>
 							</IonAvatar>
 						</IonItem>
 						<IonItem>

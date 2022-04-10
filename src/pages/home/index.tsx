@@ -6,7 +6,10 @@ import MenuLeft from '../../components/menu'
 import PostList from '../../components/postList'
 import ToolBar from '../../components/toolBar'
 
+import { useSessionUser } from '../../functions/Utils'
+
 const Home: React.FC = () => {
+	useSessionUser()
 	return (
 		<IonPage>
 			<Header></Header>

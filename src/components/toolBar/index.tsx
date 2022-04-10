@@ -15,7 +15,7 @@ const ToolBar: React.FC = () => {
 				<IonIcon icon={homeOutline} />
 			</IonTabButton>
 
-			<IonTabButton>
+			<IonTabButton tab='explore' href='/explore'>
 				<IonIcon icon={searchOutline} />
 			</IonTabButton>
 			<IonTabButton>

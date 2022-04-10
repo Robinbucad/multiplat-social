@@ -5,9 +5,10 @@ import {
 	IonTitle,
 	IonMenuToggle,
 } from '@ionic/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useLocation } from 'react-router'
 import defaultPic from '../../assets/images/default-pic.png'
+import { UserContext } from '../../context/user/user.context'
 import './style.scss'
 
 const Header: React.FC = () => {
@@ -22,6 +23,7 @@ const Header: React.FC = () => {
 		}
 		handleTitle(location.pathname)
 	}, [location])
+	const { user } = useContext(UserContext)
 
 	return (
 		<IonHeader className='ion-padding'>
@@ -29,7 +31,7 @@ const Header: React.FC = () => {
 				<IonMenuToggle slot='start'>
 					<IonAvatar className='img-prof'>
 						<img
-							src={defaultPic}
+							src={user.file === '' ? defaultPic : user.file}
 							className='img-prof'
 							alt='Imagen del usuario'
 						/>

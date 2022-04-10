@@ -7,30 +7,19 @@ import SignUp from './pages/signUpLogin/signUp'
 import Login from './pages/signUpLogin/login'
 import Landing from './pages/landing'
 import Home from './pages/home'
+import Explore from './pages/explore'
 
 setupIonicReact()
-const token = sessionStorage.getItem('token')
 
 const App: React.FC = () => (
 	<IonApp>
 		<IonReactRouter>
 			<IonRouterOutlet>
-				<Route
-					exact
-					path='/'
-					render={() => {
-						return token ? <Landing /> && <Home /> : <Landing />
-					}}
-				></Route>
+				<Route exact path='/' component={Landing}></Route>
 				<Route exact path='/signUp' component={SignUp}></Route>
 				<Route exact path='/login' component={Login}></Route>
-				<Route
-					exact
-					path='/home'
-					render={() => {
-						return token ? <Landing /> && <Home /> : <Landing />
-					}}
-				></Route>
+				<Route exact path='/home' component={Home}></Route>
+				<Route exact path='/explore' component={Explore}></Route>
 			</IonRouterOutlet>
 		</IonReactRouter>
 	</IonApp>
