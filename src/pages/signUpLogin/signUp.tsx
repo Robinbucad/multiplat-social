@@ -20,7 +20,7 @@ const SignUpLogin: React.FC = () => {
 	const { navigate } = useContext(NavContext)
 	const redirect = useCallback(() => navigate('/'), [])
 
-	const handleSubmit = async (e: any) => {
+	const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		setLoading(true)
 		const userFormData = new FormData(e.target)

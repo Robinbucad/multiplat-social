@@ -15,13 +15,16 @@ import {
 	IonTitle,
 	NavContext,
 } from '@ionic/react'
+import { UserContext } from '../../context/user/user.context'
+import { UserType } from '../../models'
 
 const Login: React.FC = () => {
 	const [loading, setLoading] = useState<boolean>(false)
 	const { navigate } = useContext(NavContext)
 	const redirect = useCallback(() => navigate('/home'), [])
+	const { setUser } = useContext(UserContext)
 
-	const handleSubmit = async (e: any) => {
+	const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		setLoading(true)
 		const userFormData = new FormData(e.target)
@@ -37,10 +40,17 @@ const Login: React.FC = () => {
 			const dat = await res.json()
 			sessionStorage.setItem('token', dat.access_token)
 
-			setTimeout(() => {
-				setLoading(false)
-				redirect()
-			}, 800)
+			const resSingleUser = await fetch('http://localhost:4000/users/single', {
+				method: 'get',
+				headers: {
+					Authorization: `Bearer ${dat.access_token}`,
+				},
+			})
+			const dataSingleUser: UserType = await resSingleUser.json()
+			setUser(dataSingleUser)
+			localStorage.setItem('user', JSON.stringify(dataSingleUser))
+			setLoading(false)
+			redirect()
 		}
 		if (res.status === 404) {
 			alert('Datos incorrectos')
