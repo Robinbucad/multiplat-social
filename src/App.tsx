@@ -1,6 +1,14 @@
 import { Route } from 'react-router-dom'
 import React from 'react'
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react'
+import {
+	IonApp,
+	IonIcon,
+	IonLabel,
+	IonRouterOutlet,
+	IonTabBar,
+	IonTabButton,
+	setupIonicReact,
+} from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
 import './global.scss'
 import SignUp from './pages/signUpLogin/signUp'
@@ -8,6 +16,7 @@ import Login from './pages/signUpLogin/login'
 import Landing from './pages/landing'
 import Home from './pages/home'
 import Explore from './pages/explore'
+import { triangle } from 'ionicons/icons'
 
 setupIonicReact()
 

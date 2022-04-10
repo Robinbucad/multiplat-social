@@ -14,6 +14,7 @@ import {
 	IonTitle,
 	NavContext,
 } from '@ionic/react'
+import { RegisterUser } from '../../functions/API'
 
 const SignUpLogin: React.FC = () => {
 	const [loading, setLoading] = useState<boolean>(false)
@@ -24,13 +25,7 @@ const SignUpLogin: React.FC = () => {
 		e.preventDefault()
 		setLoading(true)
 		const userFormData = new FormData(e.target)
-		const METHOD = {
-			method: 'post',
-			body: JSON.stringify(Object.fromEntries(userFormData)),
-			headers: { 'Content-type': 'application/json' },
-		}
-
-		const res = await fetch(`${process.env.REACT_APP_REGISTER_API}`, METHOD)
+		const res = await RegisterUser(userFormData)
 		if (res.status === 201) {
 			alert('Se te ha enviado un correo de validación')
 			setLoading(false)

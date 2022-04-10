@@ -27,6 +27,18 @@ export const LoginUser = async (data: any) => {
 		const dataSingleUser: UserType = await resSingleUser.json()
 		localStorage.setItem('user', JSON.stringify(dataSingleUser))
 
-		return { dataSingleUser, res }
+		return { dataSingleUser, res } 	
 	}
+}
+
+export const RegisterUser = async(data:any) => {
+	const REGISTERMETHOD = {
+		method: 'post',
+		body: JSON.stringify(Object.fromEntries(data)),
+		headers: { 'Content-type': 'application/json' },
+	}
+	const res:Response = await fetch(`${process.env.REACT_APP_REGISTER_API}`,
+	REGISTERMETHOD)
+
+	return res
 }
