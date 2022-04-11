@@ -1,4 +1,4 @@
-import { MethodPOST, UserType } from '../../models'
+import { MethodPOST, Token, UserType } from '../../models'
 
 export const LoginUser = async (data:FormData) => {
 	
@@ -13,7 +13,7 @@ export const LoginUser = async (data:FormData) => {
 		METHODLOG
 	)
 	if (res.status === 201) {
-		const dat = await res.json()
+		const dat:Token = await res.json()
 		sessionStorage.setItem('token', dat.access_token)
 
 		const resSingleUser: Response = await fetch(
@@ -40,6 +40,5 @@ export const RegisterUser = async(data:FormData) => {
 	}
 	const res:Response = await fetch(`${process.env.REACT_APP_REGISTER_API}`,
 	REGISTERMETHOD)
-
 	return res
 }

@@ -1,4 +1,4 @@
-
+/* eslint-disable camelcase */
 export type UserType = {
     email:string,
     name:string,
@@ -20,3 +20,7 @@ export type UserLoggin = {
     dataSingleUser:UserType
     res:Response
 } | undefined
+
+export type Token = {
+    access_token:string
+}
