@@ -76,7 +76,7 @@ const Home: React.FC = () => {
 							</IonTitle>
 
 							<IonButton
-								href='login'
+								href='/login'
 								className='btn-landing ion-margin-top'
 								shape='round'
 								fill='outline'

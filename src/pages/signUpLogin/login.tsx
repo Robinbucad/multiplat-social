@@ -21,16 +21,16 @@ import { LoginUser } from '../../functions/API'
 const Login: React.FC = () => {
 	const [loading, setLoading] = useState<boolean>(false)
 	const { navigate } = useContext(NavContext)
-	const redirect = useCallback(() => navigate('/home'), [])
-	const { setUser } = useContext(UserContext)
 
+	const { setUser } = useContext(UserContext)
+	const redirect = useCallback(() => navigate(`/home/`), [])
 	const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		setLoading(true)
 		const userFormData = new FormData(e.target)
 		const user = await LoginUser(userFormData)
 		if (user?.dataSingleUser) {
-			await setUser(user)
+			await setUser(user.dataSingleUser)
 			setLoading(false)
 			redirect()
 		}

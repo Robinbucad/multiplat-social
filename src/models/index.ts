@@ -4,6 +4,6 @@ export type UserType = {
     name:string,
     date:string,
     file:string
-    id:string
+    _id:string
 }
 

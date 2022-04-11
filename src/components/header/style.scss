@@ -2,3 +2,18 @@
     width: 40px;
     height: 40px;
 }
+
+.header{
+    padding: 8px;
+}
+
+.search-input {
+    border: none ;
+    background-color: #EFF3F4;
+    padding:1px !important;
+    --padding-start: 10px !important;
+    color: #999999;
+    border-radius: 28px;
+    margin-left: 1em;
+    height: 1.8em;
+}

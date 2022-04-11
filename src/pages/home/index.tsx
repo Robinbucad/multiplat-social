@@ -13,7 +13,7 @@ const Home: React.FC = () => {
 	useSessionUser()
 	return (
 		<IonPage>
-			<Header></Header>
+			<Header title='Inicio'></Header>
 			<MenuLeft></MenuLeft>
 			<IonContent fullscreen>
 				<PostList></PostList>

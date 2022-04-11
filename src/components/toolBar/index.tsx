@@ -1,6 +1,6 @@
-import { IonTabBar, IonTabButton, IonIcon } from '@ionic/react'
-import { IonReactRouter } from '@ionic/react-router'
+import { IonIcon, IonButton, IonItem, IonToolbar } from '@ionic/react'
 
+import './style.scss'
 import {
 	notificationsOutline,
 	mailOutline,
@@ -8,30 +8,35 @@ import {
 	homeOutline,
 } from 'ionicons/icons'
 import React from 'react'
-import { useHistory } from 'react-router'
 
 const ToolBar: React.FC = () => {
-	const history = useHistory()
+	const handleExplore = () => {
+		window.location.href = `/explore/`
+	}
+	const handleHome = () => {
+		window.location.href = `/home/`
+	}
 
 	return (
-		<IonReactRouter>
-			<IonTabBar>
-				<IonTabButton tab='home' onClick={() => console.log('Hola')}>
+		<IonToolbar>
+			<IonItem>
+				<IonButton onClick={handleHome} fill='clear' className='btn-tool'>
 					<IonIcon icon={homeOutline} />
-				</IonTabButton>
+				</IonButton>
 
-				<IonTabButton tab='explore' href='/explore'>
+				<IonButton fill='clear' onClick={handleExplore} className='btn-tool'>
 					<IonIcon icon={searchOutline} />
-				</IonTabButton>
-				<IonTabButton>
-					<IonIcon icon={notificationsOutline} />
-				</IonTabButton>
+				</IonButton>
 
-				<IonTabButton>
+				<IonButton fill='clear' className='btn-tool'>
+					<IonIcon icon={notificationsOutline} />
+				</IonButton>
+
+				<IonButton fill='clear' className='btn-tool'>
 					<IonIcon icon={mailOutline} />
-				</IonTabButton>
-			</IonTabBar>
-		</IonReactRouter>
+				</IonButton>
+			</IonItem>
+		</IonToolbar>
 	)
 }
 

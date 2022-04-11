@@ -1,21 +1,24 @@
 import { UserContext } from './user.context'
-import React, { useState, ReactNode } from 'react'
+import React, { useState, ReactNode, useEffect } from 'react'
 import { UserType } from '../../models'
 
 type Props = {
 	children: ReactNode
 }
 
-const userFromLocal: UserType = JSON.parse(localStorage.getItem('user') || '')
-
 const UserProvider: React.FC<Props> = ({ children }: Props) => {
-	const [userSession, getUserSession] = useState<any | boolean>('')
-	const [user, setUser] = useState<UserType>(userFromLocal)
+	const userFromLocal = localStorage.getItem('user') || ''
+	const [user, setUser] = useState<UserType>()
+
+	useEffect(() => {
+		try {
+			const userData: UserType = JSON.parse(userFromLocal)
+			setUser(userData)
+		} catch (err) {}
+	}, [])
 
 	return (
-		<UserContext.Provider
-			value={{ userSession, getUserSession, user, setUser }}
-		>
+		<UserContext.Provider value={{ user, setUser }}>
 			{children}
 		</UserContext.Provider>
 	)

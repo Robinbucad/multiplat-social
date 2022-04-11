@@ -4,29 +4,26 @@ import {
 	IonToolbar,
 	IonTitle,
 	IonMenuToggle,
+	IonList,
+	IonInput,
+	IonCol,
+	IonRow,
 } from '@ionic/react'
-import React, { useEffect, useState, useContext } from 'react'
-import { useLocation } from 'react-router'
+import React, { useContext } from 'react'
+
 import defaultPic from '../../assets/images/default-pic.png'
 import { UserContext } from '../../context/user/user.context'
 import './style.scss'
 
-const Header: React.FC = () => {
-	const location = useLocation()
-	const [title, setTitle] = useState<string>('')
-	useEffect(() => {
-		const handleTitle = (path: string) => {
-			switch (path) {
-				case '/home':
-					setTitle('Inicio')
-			}
-		}
-		handleTitle(location.pathname)
-	}, [location])
+type Props = {
+	title?: string
+}
+
+const Header: React.FC<Props> = props => {
 	const { user } = useContext(UserContext)
 
 	return (
-		<IonHeader className='ion-padding'>
+		<IonHeader className='header'>
 			<IonToolbar>
 				<IonMenuToggle slot='start'>
 					<IonAvatar className='img-prof'>
@@ -38,7 +35,22 @@ const Header: React.FC = () => {
 					</IonAvatar>
 				</IonMenuToggle>
 
-				<IonTitle color='dark'>{title}</IonTitle>
+				{window.location.pathname === `/explore/` ? (
+					<IonList lines='none'>
+						<IonRow>
+							<IonCol size='9'>
+								<IonInput
+									name='email'
+									className='search-input'
+									type='text'
+									color='dark'
+									placeholder='Buscar en twitter'
+								></IonInput>
+							</IonCol>
+						</IonRow>
+					</IonList>
+				) : null}
+				<IonTitle color='dark'>{props.title}</IonTitle>
 			</IonToolbar>
 		</IonHeader>
 	)
