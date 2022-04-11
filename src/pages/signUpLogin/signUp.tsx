@@ -19,13 +19,13 @@ import { RegisterUser } from '../../functions/API'
 const SignUpLogin: React.FC = () => {
 	const [loading, setLoading] = useState<boolean>(false)
 	const { navigate } = useContext(NavContext)
-	const redirect = useCallback(() => navigate('/'), [])
+	const redirect: Function = useCallback(() => navigate('/'), [])
 
 	const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		setLoading(true)
-		const userFormData = new FormData(e.target)
-		const res = await RegisterUser(userFormData)
+		const userFormData: FormData = new FormData(e.target)
+		const res: Response = await RegisterUser(userFormData)
 		if (res.status === 201) {
 			alert('Se te ha enviado un correo de validación')
 			setLoading(false)

@@ -1,7 +1,8 @@
-import { UserType } from '../../models'
+import { MethodPOST, UserType } from '../../models'
 
-export const LoginUser = async (data: any) => {
-	const METHODLOG = {
+export const LoginUser = async (data:FormData) => {
+	
+	const METHODLOG:MethodPOST = {
 		method: 'post',
 		body: JSON.stringify(Object.fromEntries(data)),
 		headers: { 'Content-type': 'application/json' },
@@ -31,8 +32,8 @@ export const LoginUser = async (data: any) => {
 	}
 }
 
-export const RegisterUser = async(data:any) => {
-	const REGISTERMETHOD = {
+export const RegisterUser = async(data:FormData) => {
+	const REGISTERMETHOD:MethodPOST = {
 		method: 'post',
 		body: JSON.stringify(Object.fromEntries(data)),
 		headers: { 'Content-type': 'application/json' },

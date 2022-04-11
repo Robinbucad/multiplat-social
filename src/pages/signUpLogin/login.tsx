@@ -17,18 +17,20 @@ import {
 } from '@ionic/react'
 import { UserContext } from '../../context/user/user.context'
 import { LoginUser } from '../../functions/API'
+import { UserLoggin } from '../../models'
 
 const Login: React.FC = () => {
 	const [loading, setLoading] = useState<boolean>(false)
 	const { navigate } = useContext(NavContext)
 
 	const { setUser } = useContext(UserContext)
-	const redirect = useCallback(() => navigate(`/home/`), [])
+	const redirect: Function = useCallback(() => navigate(`/home/`), [])
+
 	const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		setLoading(true)
-		const userFormData = new FormData(e.target)
-		const user = await LoginUser(userFormData)
+		const userFormData: FormData = new FormData(e.target)
+		const user: UserLoggin = await LoginUser(userFormData)
 		if (user?.dataSingleUser) {
 			await setUser(user.dataSingleUser)
 			setLoading(false)
