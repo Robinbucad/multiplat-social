@@ -8,6 +8,8 @@ import Login from './pages/signUpLogin/login'
 import Landing from './pages/landing'
 import Home from './pages/home'
 import Explore from './pages/explore'
+import UserPage from './pages/profile'
+import CreateTweet from './pages/addTweet'
 
 setupIonicReact()
 
@@ -17,11 +19,12 @@ const App: React.FC = () => {
 			<IonReactRouter>
 				<IonRouterOutlet>
 					<Route path='/' component={Landing}></Route>
-
 					<Route path='/signUp' component={SignUp}></Route>
 					<Route path='/login' component={Login}></Route>
 					<Route path='/home' component={Home}></Route>
 					<Route path='/explore' component={Explore}></Route>
+					<Route path='/profile/:userid' component={UserPage}></Route>
+					<Route path='/compose/tweet' component={CreateTweet}></Route>
 				</IonRouterOutlet>
 			</IonReactRouter>
 		</IonApp>

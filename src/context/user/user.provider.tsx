@@ -9,6 +9,7 @@ type Props = {
 const UserProvider: React.FC<Props> = ({ children }: Props) => {
 	const userFromLocal = localStorage.getItem('user') || ''
 	const [user, setUser] = useState<UserType>()
+	const [loading, setLoading] = useState<boolean>(false)
 
 	useEffect(() => {
 		try {
@@ -18,7 +19,7 @@ const UserProvider: React.FC<Props> = ({ children }: Props) => {
 	}, [])
 
 	return (
-		<UserContext.Provider value={{ user, setUser }}>
+		<UserContext.Provider value={{ user, setUser, loading, setLoading }}>
 			{children}
 		</UserContext.Provider>
 	)

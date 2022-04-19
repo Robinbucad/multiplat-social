@@ -1,0 +1,30 @@
+.info-user{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.follows{
+    display: flex;
+    gap: 1rem;
+}
+
+.username{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+.info-profile{
+    font-size: 0.8em;
+}
+
+.date-profile{
+    font-size: 0.9em;
+}
+
+.username-tag{
+    display: flex;
+    flex-direction: column;
+}
+
+
+

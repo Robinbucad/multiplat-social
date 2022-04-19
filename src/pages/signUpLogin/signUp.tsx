@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from 'react'
+import React, { useCallback, useContext } from 'react'
 import './style.scss'
 import { logoTwitter, closeOutline } from 'ionicons/icons'
 import {
@@ -15,10 +15,11 @@ import {
 	NavContext,
 } from '@ionic/react'
 import { RegisterUser } from '../../functions/API'
+import { UserContext } from '../../context/user/user.context'
 
 const SignUpLogin: React.FC = () => {
-	const [loading, setLoading] = useState<boolean>(false)
 	const { navigate } = useContext(NavContext)
+	const { loading, setLoading } = useContext(UserContext)
 	const redirect: Function = useCallback(() => navigate('/'), [])
 
 	const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {

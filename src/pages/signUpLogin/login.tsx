@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useCallback, useContext } from 'react'
 import './style.scss'
 import { logoTwitter, closeOutline } from 'ionicons/icons'
 import {
@@ -20,10 +20,9 @@ import { LoginUser } from '../../functions/API'
 import { UserLoggin } from '../../models'
 
 const Login: React.FC = () => {
-	const [loading, setLoading] = useState<boolean>(false)
 	const { navigate } = useContext(NavContext)
 
-	const { setUser } = useContext(UserContext)
+	const { setUser, loading, setLoading } = useContext(UserContext)
 	const redirect: Function = useCallback(() => navigate(`/home/`), [])
 
 	const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
