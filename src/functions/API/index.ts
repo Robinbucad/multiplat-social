@@ -1,4 +1,4 @@
-import { MethodPOST, Token, UserType } from '../../models'
+import { MethodPOST, Token, Tweet, UserType } from '../../models'
 
 export const LoginUser = async (data:FormData) => {
 	
@@ -40,5 +40,15 @@ export const RegisterUser = async(data:FormData) => {
 	}
 	const res:Response = await fetch(`${process.env.REACT_APP_REGISTER_API}`,
 	REGISTERMETHOD)
+	return res
+}
+
+export const PostTweet = async(data:Tweet) => {
+	const TweetMethod:MethodPOST = {
+		method:'post',
+		body:JSON.stringify(data),
+		headers: { 'Content-type': 'application/json' }
+	}
+	const res:Response = await fetch(`http://localhost:4000/tweets/`, TweetMethod)
 	return res
 }

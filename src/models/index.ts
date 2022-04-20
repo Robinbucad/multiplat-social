@@ -24,3 +24,9 @@ export type UserLoggin = {
 export type Token = {
     access_token:string
 }
+
+export type Tweet = {
+    tweet:string,
+    user:string,
+    date:string
+}
