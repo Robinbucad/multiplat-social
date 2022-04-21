@@ -10,6 +10,7 @@ import {
 	IonProgressBar,
 	IonRow,
 	IonTextarea,
+	IonToast,
 	NavContext,
 } from '@ionic/react'
 import { arrowBackOutline, imageOutline } from 'ionicons/icons'
@@ -24,6 +25,8 @@ const CreateTweet: React.FC = () => {
 	const { user, loading, setLoading } = useContext(UserContext)
 	const [text, setText] = useState<string>('')
 	const [enableBtn, setEnabled] = useState<boolean>(true)
+	const [showAddToast, setShowAddToast] = useState<boolean>(false)
+
 	const redirect: Function = useCallback(
 		() => navigate(`/profile/${user.username}`),
 		[]
@@ -40,8 +43,12 @@ const CreateTweet: React.FC = () => {
 		}
 	}
 	const date = new Date()
-	const currentDate = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`
+	const currentDate = `${date.getDay()} ${date.toLocaleDateString('en-us', {
+		month: 'short',
+	})} ${date.getFullYear()}`
+
 	const handleSubmitTweet = async (e: SyntheticEvent) => {
+		setShowAddToast(true)
 		e.preventDefault()
 		setText('')
 		setLoading(true)
@@ -113,6 +120,12 @@ const CreateTweet: React.FC = () => {
 						</IonRow>
 					</IonCol>
 				</IonRow>
+				<IonToast
+					isOpen={showAddToast}
+					onDidDismiss={() => setShowAddToast(false)}
+					message='Se ha subido correctamente.'
+					duration={1000}
+				/>
 			</IonContent>
 		</IonPage>
 	)

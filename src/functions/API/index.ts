@@ -1,4 +1,6 @@
+
 import { MethodPOST, Token, Tweet, UserType } from '../../models'
+const token = sessionStorage.getItem('token')
 
 export const LoginUser = async (data:FormData) => {
 	
@@ -47,8 +49,35 @@ export const PostTweet = async(data:Tweet) => {
 	const TweetMethod:MethodPOST = {
 		method:'post',
 		body:JSON.stringify(data),
-		headers: { 'Content-type': 'application/json' }
+		headers: { 'Content-type': 'application/json',Authorization: `Bearer ${token}` }
 	}
 	const res:Response = await fetch(`http://localhost:4000/tweets/`, TweetMethod)
 	return res
+}
+
+
+
+export const GetUserTweets = async(userId:string) => {
+	const res:Response = await fetch(`http://localhost:4000/tweets/${userId}`,{
+		method:'get',
+		headers: {
+			Authorization: `Bearer ${token}`
+		}
+	})
+	const dat:Tweet[] = await res.json()
+
+	return dat
+}
+
+export const deleteTweet = async(tweetId:string | undefined) => {
+	
+	const res:Response = await fetch(`http://localhost:4000/tweets/${tweetId}`, {
+		method:'delete',
+		headers: {
+			Authorization: `Bearer ${token}`
+		},
+		
+	})
+	const dat = await res.json()
+	console.log(dat)
 }

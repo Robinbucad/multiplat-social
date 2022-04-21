@@ -29,4 +29,7 @@ export type Tweet = {
     tweet:string,
     user:string,
     date:string
+    id?:string
+    img?:string
+    _id?:string
 }

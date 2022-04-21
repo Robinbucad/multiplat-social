@@ -18,8 +18,7 @@ const UserPage: React.FC = () => {
 			<IonContent>
 				<UserProfile></UserProfile>
 				<TweetList></TweetList>
-				<TweetList></TweetList>
-				<TweetList></TweetList>
+
 				<Tweet></Tweet>
 			</IonContent>
 
