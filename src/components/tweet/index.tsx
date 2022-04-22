@@ -1,7 +1,8 @@
 import { IonFab, IonFabButton, IonIcon } from '@ionic/react'
 import { pencil } from 'ionicons/icons'
+import React from 'react'
 
-const Tweet = () => {
+const CreateTweetBtn: React.FC = () => {
 	const handleAddTweet = () => {
 		window.location.href = `/compose/tweet`
 	}
@@ -14,4 +15,4 @@ const Tweet = () => {
 	)
 }
 
-export default Tweet
+export default CreateTweetBtn

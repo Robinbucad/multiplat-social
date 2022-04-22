@@ -5,6 +5,8 @@ export type UserType = {
     date:string,
     file:string
     _id:string
+    followers:[],
+    following:[]
 }
 
 export type MethodPOST = {
@@ -26,10 +28,14 @@ export type Token = {
 }
 
 export type Tweet = {
+    name:string
     tweet:string,
     user:string,
+    username:string
     date:string
     id?:string
-    img?:string
     _id?:string
+    likes:[],
+    retweets:[]
+    tweetImg:string
 }

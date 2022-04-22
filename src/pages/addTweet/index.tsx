@@ -27,10 +27,7 @@ const CreateTweet: React.FC = () => {
 	const [enableBtn, setEnabled] = useState<boolean>(true)
 	const [showAddToast, setShowAddToast] = useState<boolean>(false)
 
-	const redirect: Function = useCallback(
-		() => navigate(`/profile/${user.username}`),
-		[]
-	)
+	const redirect: Function = useCallback(() => navigate(`/home`), [])
 	const { navigate } = useContext(NavContext)
 
 	const handleAddTweet = (e: string) => {
@@ -54,8 +51,13 @@ const CreateTweet: React.FC = () => {
 		setLoading(true)
 		const tweet: Tweet = {
 			tweet: text,
+			name: user.name,
+			username: user.username,
 			user: user._id,
 			date: currentDate,
+			likes: [],
+			retweets: [],
+			tweetImg: '',
 		}
 		try {
 			const res: Response = await PostTweet(tweet)

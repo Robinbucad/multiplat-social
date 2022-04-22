@@ -1,15 +1,12 @@
-import { IonContent, IonGrid } from '@ionic/react'
+import { IonContent } from '@ionic/react'
+
 import React from 'react'
-import SinglePost from '../post'
+import CreateTweet from '../tweet'
+
 const PostList: React.FC = () => {
 	return (
 		<IonContent>
-			<IonGrid>
-				<SinglePost></SinglePost>
-				<SinglePost></SinglePost>
-				<SinglePost></SinglePost>
-				<SinglePost></SinglePost>
-			</IonGrid>
+			<CreateTweet></CreateTweet>
 		</IonContent>
 	)
 }

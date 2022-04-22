@@ -15,7 +15,7 @@ import ToolBarProfile from '../toolBarProfile'
 
 const UserProfile: React.FC = () => {
 	const { user } = useContext(UserContext)
-
+	console.log(user)
 	return (
 		<IonGrid>
 			<IonRow>
@@ -42,7 +42,10 @@ const UserProfile: React.FC = () => {
 							<IonIcon icon={calendarOutline}></IonIcon>
 							Se unión el 09/04/2022
 						</span>
-						<span className='follows'>3 siguiendo 1 seguidor</span>
+						<span className='follows'>
+							{user.followers.length} siguiendo {user.following.length}{' '}
+							seguidores
+						</span>
 					</div>
 				</IonCol>
 			</IonRow>
