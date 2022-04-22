@@ -17,6 +17,7 @@ import './style.scss'
 
 type Props = {
 	title?: string
+	handleSearch?: (e: string | undefined) => void
 }
 
 const Header: React.FC<Props> = props => {
@@ -40,6 +41,7 @@ const Header: React.FC<Props> = props => {
 						<IonRow>
 							<IonCol size='9'>
 								<IonInput
+									onIonChange={e => props.handleSearch?.(e.detail.value!)}
 									name='email'
 									className='search-input'
 									type='text'

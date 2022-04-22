@@ -55,7 +55,17 @@ export const PostTweet = async(data:Tweet) => {
 	return res
 }
 
+export const GetAllUsers = async() => {
+	const res:Response = await fetch(`http://localhost:4000/users/`,{
+		method:'get',
+		headers: {
+			Authorization: `Bearer ${token}`
+		}
+	})
+	const dat:UserType[] = await res.json()
 
+	return dat
+}
 
 export const GetUserTweets = async(userId:string) => {
 	const res:Response = await fetch(`http://localhost:4000/tweets/${userId}`,{
